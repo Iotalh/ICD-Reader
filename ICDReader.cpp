@@ -11,12 +11,14 @@ using namespace std;
 class DateUtil {
 private:
 	const static int SECPERDAY = 86400;
+	const static int YEAROFFSET = 1900;
+	const static int MONOFFSET = 1;
 public:
 	static time_t StrtoDate(string str) {
 		struct tm date = {};
 		sscanf_s(str.c_str(), "%4d%2d%2d", &date.tm_year, &date.tm_mon, &date.tm_mday);
-		date.tm_year -= 1900;
-		date.tm_mon -= 1;
+		date.tm_year -= YEAROFFSET;
+		date.tm_mon -= MONOFFSET;
 		return mktime(&date) / SECPERDAY;
 	}
 	static time_t getMonthEndDate(string sdate) {
@@ -114,12 +116,7 @@ public:
 		newNode->next = head->next;
 		head->next = newNode;
 	}
-	void sort() {
 
-	}
-	Node* merge() {
-
-	}
 	Node* getFirst() { return head->next; }
 };
 
